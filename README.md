@@ -187,3 +187,46 @@ flowchart TD
     I --> J[活动结束]
     J --> K[进行活动评价]
     F -- 是 --> L[提示活动人数已满]
+
+    ---
+
+# Week 03 Spring Boot 工程运行说明
+
+## 开发环境
+
+- Java 25
+- Spring Boot 4.0.8
+- Maven Wrapper
+- 默认端口：8080
+
+## 工程目录
+
+Spring Boot 工程位于：
+
+`monolith/`
+
+## 测试
+
+进入 `monolith/`：
+
+```bash
+./mvnw test
+测试通过后应显示：
+BUILD SUCCESS
+
+启动
+执行：
+./mvnw spring-boot:run
+
+启动成功后访问：
+- GET 接口：http://localhost:8080/api/hello
+- 健康检查：http://localhost:8080/actuator/health
+当前实现范围
+当前仅完成 Spring Boot 工程起步、基础配置、GET 接口、健康检查和启动测试。
+暂未实现：
+- 具体业务模型；
+- Service；
+- Repository；
+- 数据库；
+- 完整 REST API。
+后续课程中将在当前工程基础上逐步实现。
