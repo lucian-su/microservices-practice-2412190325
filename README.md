@@ -188,45 +188,91 @@ flowchart TD
     J --> K[进行活动评价]
     F -- 是 --> L[提示活动人数已满]
 
-    ---
+```
 
-# Week 03 Spring Boot 工程运行说明
+## Week 03 工程起步
 
-## 开发环境
+工程位于 `monolith/`，Java 25、Spring Boot 4.0.8。第 03 周完成 GET `/api/hello`、健康检查与启动测试。运行方式现以 Week 04 配置为准。
 
-- Java 25
-- Spring Boot 4.0.8
-- Maven Wrapper
-- 默认端口：8080
+## Week 04：活动发布与报名
 
-## 工程目录
+所有新增代码沿用 `com.zjgsu.scy.monolith`，继续开发原有 `monolith/`。实现 Activity、Registration、Service、Controller、JPA Repository、输入输出 DTO 和自动测试。
 
-Spring Boot 工程位于：
+### 本地环境与测试
 
-`monolith/`
-
-## 测试
-
-进入 `monolith/`：
+需要 JDK 25（沿用第 03 周）和 Maven Wrapper。macOS 可使用 `brew install openjdk@25`，并按 Homebrew 提示配置 JAVA_HOME。先确认 `java -version`。
 
 ```bash
+cd monolith
+chmod +x mvnw
 ./mvnw test
-测试通过后应显示：
-BUILD SUCCESS
+```
 
-启动
-执行：
+测试使用 H2，自动建表、准备数据及回滚清理，不需要启动 MySQL。
+
+### macOS 安装 MySQL 与建表
+
+```bash
+brew install mysql@8.4
+brew services start mysql@8.4
+export PATH="$(brew --prefix mysql@8.4)/bin:$PATH"
+# 在仓库根目录执行；若设置了 root 密码，加 -p
+mysql -u root < monolith/scripts/init.sql
+mysql -u root
+```
+
+在 MySQL 控制台执行：
+
+```sql
+CREATE USER IF NOT EXISTS 'boardgame'@'localhost' IDENTIFIED BY 'boardgame_dev';
+GRANT SELECT, INSERT, UPDATE, DELETE ON boardgame_club.* TO 'boardgame'@'localhost';
+```
+
+`boardgame_dev` 是本地开发示例密码；实际配置可通过环境变量覆盖：
+
+```bash
+cd monolith
+export DB_USERNAME=boardgame
+export DB_PASSWORD=boardgame_dev
+export DB_URL='jdbc:mysql://localhost:3306/boardgame_club?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&characterEncoding=UTF-8'
 ./mvnw spring-boot:run
+```
 
-启动成功后访问：
-- GET 接口：http://localhost:8080/api/hello
-- 健康检查：http://localhost:8080/actuator/health
-当前实现范围
-当前仅完成 Spring Boot 工程起步、基础配置、GET 接口、健康检查和启动测试。
-暂未实现：
-- 具体业务模型；
-- Service；
-- Repository；
-- 数据库；
-- 完整 REST API。
-后续课程中将在当前工程基础上逐步实现。
+默认端口 8080；默认 MySQL 配置位于 `src/main/resources/application.yml`。已有同名库若表结构不一致，应人工迁移或使用新开发库；init.sql 不会覆盖已有数据。
+
+### 可直接运行的 curl 示例
+
+下面创建活动使用未来日期。若执行时间已晚于该日期，请换成未来时间。报名时使用创建响应中的实际 id。
+
+```bash
+curl -i -X POST http://localhost:8080/api/activities \
+  -H 'Content-Type: application/json' \
+  -d '{"name":"桌游之夜","location":"学生活动中心","startsAt":"2099-10-17T19:00:00","capacity":2}'
+
+curl -i http://localhost:8080/api/activities
+
+curl -i -X POST http://localhost:8080/api/activities/1/registrations \
+  -H 'Content-Type: application/json' \
+  -d '{"memberNo":"2412190325","memberName":"施晨煜"}'
+```
+
+自动完成创建、查询、报名、重复及人数上限验证，避免写死活动 ID：
+
+```bash
+# 在 monolith/ 中，需要 Python 3
+python3 scripts/smoke-test.py
+```
+
+| HTTP | 路径 | 用途 / 状态码 |
+| --- | --- | --- |
+| POST | /api/activities | 创建，201 + Location |
+| GET | /api/activities | 列表，200 |
+| GET | /api/activities/{id} | 详情，200 / 404 |
+| POST | /api/activities/{id}/registrations | 报名，201 / 404 / 409 |
+| GET | /api/activities/{id}/registrations | 报名列表，200 / 404 |
+| GET | /api/activities/{id}/registrations/{registrationId} | 报名详情，200 / 404 |
+| GET | /api/courses | 课内课程示例，200 |
+
+无效请求返回 400；重复报名、人数已满、活动已开始返回 409。Controller 不直接访问 Repository。使用学号检查重复；暂无身份认证，仅用于课程业务验证。
+
+数据库设计见 [docs/database.md](docs/database.md)，本周记录及证据见 [docs/homework/week-04/index.md](docs/homework/week-04/index.md)。

@@ -1,0 +1,10 @@
+<!doctype html><meta charset="utf-8"><style>body{background:#eef2f6;color:#17212f;font-family:Arial,"Noto Sans CJK SC",sans-serif;margin:36px}h1{font-size:30px;margin:0 0 12px}p{font-size:19px;color:#455568}section{background:white;border:1px solid #c9d3df;border-radius:8px;padding:20px;margin-top:20px}h2{font-size:22px;margin:0 0 14px;color:#205c91}pre{font-family:"DejaVu Sans Mono","Noto Sans CJK SC",monospace;font-size:22px;line-height:1.5;margin:0;white-space:pre-wrap;overflow-wrap:anywhere}footer{margin-top:16px;font-size:17px;color:#556677}</style><h1>第 11 题：课程查询与数据库读写</h1><p>Week 04 · 实际运行结果 · 源日志保存在 evidence/</p><section><h2>GET /api/courses（MySQL）</h2><pre>GET /api/courses -&gt; HTTP 200
+[
+  {
+    &quot;id&quot;: 1,
+    &quot;code&quot;: &quot;MS04&quot;,
+    &quot;name&quot;: &quot;微服务架构与实践&quot;
+  }
+]
+SMOKE TEST PASSED: fresh activity, persistence, 201/200/400/404/409 verified
+</pre></section><section><h2>Course JPA 读写测试（实际执行）</h2><pre>[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.402 s -- in com.zjgsu.scy.monolith.repository.ActivityRepositoryTest</pre></section><footer>由实际执行日志生成的证据页截图；不是 IDE 或终端桌面截图。</footer>

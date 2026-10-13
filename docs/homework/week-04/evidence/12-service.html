@@ -1,0 +1,58 @@
+<!doctype html><meta charset="utf-8"><style>body{background:#eef2f6;color:#17212f;font-family:Arial,"Noto Sans CJK SC",sans-serif;margin:36px}h1{font-size:30px;margin:0 0 12px}p{font-size:18px;color:#455568}section{background:white;border:1px solid #c9d3df;border-radius:8px;padding:20px;margin-top:20px}h2{font-size:22px;margin:0 0 14px;color:#205c91}pre{font-family:"DejaVu Sans Mono","Noto Sans CJK SC",monospace;font-size:20px;line-height:1.5;margin:0;white-space:pre-wrap;overflow-wrap:anywhere}footer{margin-top:16px;font-size:16px;color:#556677}</style><h1>第 12 题：报名业务规则</h1><p>Week 04 · com.zjgsu.scy.monolith · 源码文件展示</p><section><h2>service/ActivityService.java</h2><pre>package com.zjgsu.scy.monolith.service;
+
+import com.zjgsu.scy.monolith.dto.ActivityDtos.*;
+import com.zjgsu.scy.monolith.exception.*;
+import com.zjgsu.scy.monolith.model.*;
+import com.zjgsu.scy.monolith.repository.*;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.*;
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Service
+@Transactional(readOnly = true)
+public class ActivityService {
+    private final ActivityRepository activities;
+    private final RegistrationRepository registrations;
+    public ActivityService(ActivityRepository activities, RegistrationRepository registrations) {
+        this.activities = activities; this.registrations = registrations;
+    }
+    @Transactional
+    public ActivityView create(CreateActivity request) {
+        return ActivityView.from(activities.save(new Activity(request.name().strip(),
+            request.location().strip(), request.startsAt(), request.capacity())));
+    }
+    public List&lt;ActivityView&gt; list() {
+        return activities.findAll(Sort.by(&quot;id&quot;)).stream().map(ActivityView::from).toList();
+    }
+    public ActivityView get(Long id) { return ActivityView.from(requireActivity(id)); }
+    public List&lt;RegistrationView&gt; registrations(Long id) {
+        requireActivity(id);
+        return registrations.findByActivityIdOrderByIdAsc(id).stream().map(RegistrationView::from).toList();
+    }
+    public RegistrationView registration(Long activityId, Long registrationId) {
+        requireActivity(activityId);
+        Registration registration = registrations.findById(registrationId)
+            .filter(r -&gt; r.getActivity().getId().equals(activityId))
+            .orElseThrow(() -&gt; new NotFoundException(&quot;报名记录不存在: &quot; + registrationId));
+        return RegistrationView.from(registration);
+    }
+    @Transactional(isolation = Isolation.READ_COMMITTED)
+    public RegistrationView register(Long id, Register request) {
+        Activity activity = activities.findForRegistration(id)
+            .orElseThrow(() -&gt; new NotFoundException(&quot;活动不存在: &quot; + id));
+        if (!activity.getStartsAt().isAfter(LocalDateTime.now()))
+            throw new BusinessConflictException(&quot;活动已开始，不能报名&quot;);
+        if (registrations.existsByActivityIdAndMemberNo(id, request.memberNo()))
+            throw new BusinessConflictException(&quot;该成员已报名，请勿重复报名&quot;);
+        if (registrations.countByActivityId(id) &gt;= activity.getCapacity())
+            throw new BusinessConflictException(&quot;活动人数已满&quot;);
+        return RegistrationView.from(registrations.saveAndFlush(
+            new Registration(activity, request.memberNo(), request.memberName().strip())));
+    }
+    private Activity requireActivity(Long id) {
+        return activities.findById(id).orElseThrow(() -&gt; new NotFoundException(&quot;活动不存在: &quot; + id));
+    }
+}
+</pre></section><footer>本页直接读取提交源码生成；截图为证据页截图，不是 IDE 桌面截图。</footer>

@@ -1,0 +1,26 @@
+<!doctype html><meta charset="utf-8"><style>body{background:#eef2f6;color:#17212f;font-family:Arial,"Noto Sans CJK SC",sans-serif;margin:36px}h1{font-size:30px;margin:0 0 12px}p{font-size:18px;color:#455568}section{background:white;border:1px solid #c9d3df;border-radius:8px;padding:20px;margin-top:20px}h2{font-size:22px;margin:0 0 14px;color:#205c91}pre{font-family:"DejaVu Sans Mono","Noto Sans CJK SC",monospace;font-size:20px;line-height:1.5;margin:0;white-space:pre-wrap;overflow-wrap:anywhere}footer{margin-top:16px;font-size:16px;color:#556677}</style><h1>第 12 题：数据访问</h1><p>Week 04 · com.zjgsu.scy.monolith · 源码文件展示</p><section><h2>repository/ActivityRepository.java</h2><pre>package com.zjgsu.scy.monolith.repository;
+
+import com.zjgsu.scy.monolith.model.Activity;
+import jakarta.persistence.LockModeType;
+import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.Param;
+import java.util.Optional;
+
+public interface ActivityRepository extends JpaRepository&lt;Activity, Long&gt; {
+    // Lock the activity row before checking capacity to serialize registrations.
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
+    @Query(&quot;select a from Activity a where a.id = :id&quot;)
+    Optional&lt;Activity&gt; findForRegistration(@Param(&quot;id&quot;) Long id);
+}
+</pre></section><section><h2>repository/RegistrationRepository.java</h2><pre>package com.zjgsu.scy.monolith.repository;
+
+import com.zjgsu.scy.monolith.model.Registration;
+import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
+
+public interface RegistrationRepository extends JpaRepository&lt;Registration, Long&gt; {
+    boolean existsByActivityIdAndMemberNo(Long activityId, String memberNo);
+    long countByActivityId(Long activityId);
+    List&lt;Registration&gt; findByActivityIdOrderByIdAsc(Long activityId);
+}
+</pre></section><footer>本页直接读取提交源码生成；截图为证据页截图，不是 IDE 桌面截图。</footer>

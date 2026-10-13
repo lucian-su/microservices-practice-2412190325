@@ -1,0 +1,4 @@
+Restarted Spring Boot with the same MySQL database.
+GET /api/activities/1/registrations -> HTTP 200
+[{"id":1,"activityId":1,"memberNo":"2412190325","memberName":"施晨煜","registeredAt":"2026-10-13T17:30:35.113964"}]
+PERSISTENCE AFTER RESTART VERIFIED

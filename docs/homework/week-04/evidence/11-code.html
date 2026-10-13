@@ -1,0 +1,24 @@
+<!doctype html><meta charset="utf-8"><style>body{background:#eef2f6;color:#17212f;font-family:Arial,"Noto Sans CJK SC",sans-serif;margin:36px}h1{font-size:30px;margin:0 0 12px}p{font-size:18px;color:#455568}section{background:white;border:1px solid #c9d3df;border-radius:8px;padding:20px;margin-top:20px}h2{font-size:22px;margin:0 0 14px;color:#205c91}pre{font-family:"DejaVu Sans Mono","Noto Sans CJK SC",monospace;font-size:20px;line-height:1.5;margin:0;white-space:pre-wrap;overflow-wrap:anywhere}footer{margin-top:16px;font-size:16px;color:#556677}</style><h1>第 11 题：课程模型与 JPA</h1><p>Week 04 · com.zjgsu.scy.monolith · 源码文件展示</p><section><h2>model/Course.java</h2><pre>package com.zjgsu.scy.monolith.model;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = &quot;courses&quot;, uniqueConstraints = @UniqueConstraint(columnNames = &quot;code&quot;))
+public class Course {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(nullable = false, length = 30)
+    private String code;
+    @Column(nullable = false, length = 100)
+    private String name;
+    protected Course() {}
+    public Course(String code, String name) { this.code = code; this.name = name; }
+    public Long getId() { return id; }
+    public String getCode() { return code; }
+    public String getName() { return name; }
+}
+</pre></section><section><h2>repository/CourseRepository.java</h2><pre>package com.zjgsu.scy.monolith.repository;
+import com.zjgsu.scy.monolith.model.Course;
+import org.springframework.data.jpa.repository.JpaRepository;
+public interface CourseRepository extends JpaRepository&lt;Course, Long&gt; {}
+</pre></section><footer>本页直接读取提交源码生成；截图为证据页截图，不是 IDE 桌面截图。</footer>

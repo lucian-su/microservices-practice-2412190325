@@ -1,0 +1,91 @@
+POST /api/activities -> HTTP 201
+Location: /api/activities/1
+{
+  "id": 1,
+  "name": "桌游之夜",
+  "location": "学生活动中心",
+  "startsAt": "2026-10-20T17:30:34",
+  "capacity": 1
+}
+GET /api/activities/1 -> HTTP 200
+{
+  "id": 1,
+  "name": "桌游之夜",
+  "location": "学生活动中心",
+  "startsAt": "2026-10-20T17:30:34",
+  "capacity": 1
+}
+GET /api/activities -> HTTP 200
+[
+  {
+    "id": 1,
+    "name": "桌游之夜",
+    "location": "学生活动中心",
+    "startsAt": "2026-10-20T17:30:34",
+    "capacity": 1
+  }
+]
+POST /api/activities/1/registrations -> HTTP 201
+Location: /api/activities/1/registrations/1
+{
+  "id": 1,
+  "activityId": 1,
+  "memberNo": "2412190325",
+  "memberName": "施晨煜",
+  "registeredAt": "2026-10-13T17:30:35.113963857"
+}
+GET /api/activities/1/registrations/1 -> HTTP 200
+{
+  "id": 1,
+  "activityId": 1,
+  "memberNo": "2412190325",
+  "memberName": "施晨煜",
+  "registeredAt": "2026-10-13T17:30:35.113964"
+}
+POST /api/activities/1/registrations -> HTTP 409
+{
+  "detail": "该成员已报名，请勿重复报名",
+  "instance": "/api/activities/1/registrations",
+  "status": 409,
+  "title": "Conflict"
+}
+POST /api/activities/1/registrations -> HTTP 409
+{
+  "detail": "活动人数已满",
+  "instance": "/api/activities/1/registrations",
+  "status": 409,
+  "title": "Conflict"
+}
+GET /api/activities/1/registrations -> HTTP 200
+[
+  {
+    "id": 1,
+    "activityId": 1,
+    "memberNo": "2412190325",
+    "memberName": "施晨煜",
+    "registeredAt": "2026-10-13T17:30:35.113964"
+  }
+]
+GET /api/activities/999999999 -> HTTP 404
+{
+  "detail": "活动不存在: 999999999",
+  "instance": "/api/activities/999999999",
+  "status": 404,
+  "title": "Not Found"
+}
+POST /api/activities -> HTTP 400
+{
+  "detail": "Invalid request content.",
+  "instance": "/api/activities",
+  "status": 400,
+  "title": "Bad Request"
+}
+GET /api/courses -> HTTP 200
+[
+  {
+    "id": 1,
+    "code": "MS04",
+    "name": "微服务架构与实践"
+  }
+]
+SMOKE TEST PASSED: fresh activity, persistence, 201/200/400/404/409 verified

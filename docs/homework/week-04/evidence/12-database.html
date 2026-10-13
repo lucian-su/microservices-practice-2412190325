@@ -1,0 +1,31 @@
+<!doctype html><meta charset="utf-8"><style>body{background:#eef2f6;color:#17212f;font-family:Arial,"Noto Sans CJK SC",sans-serif;margin:36px}h1{font-size:30px;margin:0 0 12px}p{font-size:19px;color:#455568}section{background:white;border:1px solid #c9d3df;border-radius:8px;padding:20px;margin-top:20px}h2{font-size:22px;margin:0 0 14px;color:#205c91}pre{font-family:"DejaVu Sans Mono","Noto Sans CJK SC",monospace;font-size:22px;line-height:1.5;margin:0;white-space:pre-wrap;overflow-wrap:anywhere}footer{margin-top:16px;font-size:17px;color:#556677}</style><h1>MySQL 8 持久化验证</h1><p>Week 04 · 实际运行结果 · 源日志保存在 evidence/</p><section><h2>数据库直接查询（mysql-read-write.log 节选）</h2><pre>+-------------------------+
+| mysql_version           |
++-------------------------+
+| 8.0.46-0ubuntu0.24.04.3 |
++-------------------------+
++--------------------------+
+| Tables_in_boardgame_club |
++--------------------------+
+| activities               |
+| courses                  |
+| registrations            |
++--------------------------+
++----+--------------+--------------------+----------+
+| id | name         | location           | capacity |
++----+--------------+--------------------+----------+
+|  1 | 桌游之夜     | 学生活动中心       |        1 |
++----+--------------+--------------------+----------+
++----+-------------+------------+-------------+
+| id | activity_id | member_no  | member_name |
++----+-------------+------------+-------------+
+|  1 |           1 | 2412190325 | 施晨煜      |
++----+-------------+------------+-------------+
++----+------+--------------------------+
+| id | code | name                     |
++----+------+--------------------------+
+|  1 | MS04 | 微服务架构与实践         |
++----+------+--------------------------+</pre></section><section><h2>应用重启后再次读取</h2><pre>Restarted Spring Boot with the same MySQL database.
+GET /api/activities/1/registrations -&gt; HTTP 200
+[{&quot;id&quot;:1,&quot;activityId&quot;:1,&quot;memberNo&quot;:&quot;2412190325&quot;,&quot;memberName&quot;:&quot;施晨煜&quot;,&quot;registeredAt&quot;:&quot;2026-10-13T17:30:35.113964&quot;}]
+PERSISTENCE AFTER RESTART VERIFIED
+</pre></section><footer>由实际执行日志生成的证据页截图；不是 IDE 或终端桌面截图。</footer>

@@ -1,0 +1,63 @@
+<!doctype html><meta charset="utf-8"><style>body{background:#eef2f6;color:#17212f;font-family:Arial,"Noto Sans CJK SC",sans-serif;margin:36px}h1{font-size:30px;margin:0 0 12px}p{font-size:18px;color:#455568}section{background:white;border:1px solid #c9d3df;border-radius:8px;padding:20px;margin-top:20px}h2{font-size:22px;margin:0 0 14px;color:#205c91}pre{font-family:"DejaVu Sans Mono","Noto Sans CJK SC",monospace;font-size:20px;line-height:1.5;margin:0;white-space:pre-wrap;overflow-wrap:anywhere}footer{margin-top:16px;font-size:16px;color:#556677}</style><h1>第 12 题：活动与报名实体</h1><p>Week 04 · com.zjgsu.scy.monolith · 源码文件展示</p><section><h2>model/Activity.java</h2><pre>package com.zjgsu.scy.monolith.model;
+
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = &quot;activities&quot;)
+public class Activity {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(nullable = false, length = 100)
+    private String name;
+    @Column(nullable = false, length = 120)
+    private String location;
+    @Column(nullable = false)
+    private LocalDateTime startsAt;
+    @Column(nullable = false)
+    private int capacity;
+
+    protected Activity() {}
+    public Activity(String name, String location, LocalDateTime startsAt, int capacity) {
+        this.name = name; this.location = location;
+        this.startsAt = startsAt; this.capacity = capacity;
+    }
+    public Long getId() { return id; }
+    public String getName() { return name; }
+    public String getLocation() { return location; }
+    public LocalDateTime getStartsAt() { return startsAt; }
+    public int getCapacity() { return capacity; }
+}
+</pre></section><section><h2>model/Registration.java</h2><pre>package com.zjgsu.scy.monolith.model;
+
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = &quot;registrations&quot;, uniqueConstraints =
+    @UniqueConstraint(name = &quot;uk_activity_member&quot;, columnNames = {&quot;activity_id&quot;, &quot;member_no&quot;}))
+public class Registration {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = &quot;activity_id&quot;, nullable = false)
+    private Activity activity;
+    @Column(name = &quot;member_no&quot;, nullable = false, length = 30)
+    private String memberNo;
+    @Column(nullable = false, length = 50)
+    private String memberName;
+    @Column(nullable = false)
+    private LocalDateTime registeredAt;
+
+    protected Registration() {}
+    public Registration(Activity activity, String memberNo, String memberName) {
+        this.activity = activity; this.memberNo = memberNo;
+        this.memberName = memberName; this.registeredAt = LocalDateTime.now();
+    }
+    public Long getId() { return id; }
+    public Activity getActivity() { return activity; }
+    public String getMemberNo() { return memberNo; }
+    public String getMemberName() { return memberName; }
+    public LocalDateTime getRegisteredAt() { return registeredAt; }
+}
+</pre></section><footer>本页直接读取提交源码生成；截图为证据页截图，不是 IDE 桌面截图。</footer>

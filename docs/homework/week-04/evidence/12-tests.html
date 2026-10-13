@@ -1,0 +1,20 @@
+<!doctype html><meta charset="utf-8"><style>body{background:#eef2f6;color:#17212f;font-family:Arial,"Noto Sans CJK SC",sans-serif;margin:36px}h1{font-size:30px;margin:0 0 12px}p{font-size:19px;color:#455568}section{background:white;border:1px solid #c9d3df;border-radius:8px;padding:20px;margin-top:20px}h2{font-size:22px;margin:0 0 14px;color:#205c91}pre{font-family:"DejaVu Sans Mono","Noto Sans CJK SC",monospace;font-size:22px;line-height:1.5;margin:0;white-space:pre-wrap;overflow-wrap:anywhere}footer{margin-top:16px;font-size:17px;color:#556677}</style><h1>自动测试：两轮全部通过</h1><p>Week 04 · 实际运行结果 · 源日志保存在 evidence/</p><section><h2>第一轮及重复运行摘要</h2><pre>JDK 25 / Spring Boot 4.0.8 / Maven 3.9.16 / H2 2.4.240
+
+FIRST RUN
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.681 s -- in com.zjgsu.scy.monolith.controller.ActivityApiTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.309 s -- in com.zjgsu.scy.monolith.repository.ActivityRepositoryTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.519 s -- in com.zjgsu.scy.monolith.MonolithApplicationTests
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.057 s -- in com.zjgsu.scy.monolith.service.ActivityServiceTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.077 s -- in com.zjgsu.scy.monolith.service.RegistrationConcurrencyTest
+[INFO] Tests run: 15, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+
+REPEAT RUN: ./mvnw test
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.046 s -- in com.zjgsu.scy.monolith.controller.ActivityApiTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.402 s -- in com.zjgsu.scy.monolith.repository.ActivityRepositoryTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.531 s -- in com.zjgsu.scy.monolith.MonolithApplicationTests
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.091 s -- in com.zjgsu.scy.monolith.service.ActivityServiceTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.074 s -- in com.zjgsu.scy.monolith.service.RegistrationConcurrencyTest
+[INFO] Tests run: 15, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+</pre></section><footer>由实际执行日志生成的证据页截图；不是 IDE 或终端桌面截图。</footer>

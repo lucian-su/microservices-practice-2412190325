@@ -1,0 +1,30 @@
+<!doctype html><meta charset="utf-8"><style>body{background:#eef2f6;color:#17212f;font-family:Arial,"Noto Sans CJK SC",sans-serif;margin:36px}h1{font-size:30px;margin:0 0 12px}p{font-size:19px;color:#455568}section{background:white;border:1px solid #c9d3df;border-radius:8px;padding:20px;margin-top:20px}h2{font-size:22px;margin:0 0 14px;color:#205c91}pre{font-family:"DejaVu Sans Mono","Noto Sans CJK SC",monospace;font-size:22px;line-height:1.5;margin:0;white-space:pre-wrap;overflow-wrap:anywhere}footer{margin-top:16px;font-size:17px;color:#556677}</style><h1>活动创建、报名及业务规则验证（MySQL）</h1><p>Week 04 · 实际运行结果 · 源日志保存在 evidence/</p><section><h2>POST /api/activities -&gt; HTTP 201</h2><pre>Location: /api/activities/1
+{
+  &quot;id&quot;: 1,
+  &quot;name&quot;: &quot;桌游之夜&quot;,
+  &quot;location&quot;: &quot;学生活动中心&quot;,
+  &quot;startsAt&quot;: &quot;2026-10-20T17:30:34&quot;,
+  &quot;capacity&quot;: 1
+}</pre></section><section><h2>POST /api/activities/1/registrations -&gt; HTTP 201</h2><pre>Location: /api/activities/1/registrations/1
+{
+  &quot;id&quot;: 1,
+  &quot;activityId&quot;: 1,
+  &quot;memberNo&quot;: &quot;2412190325&quot;,
+  &quot;memberName&quot;: &quot;施晨煜&quot;,
+  &quot;registeredAt&quot;: &quot;2026-10-13T17:30:35.113963857&quot;
+}</pre></section><section><h2>POST /api/activities/1/registrations -&gt; HTTP 409</h2><pre>{
+  &quot;detail&quot;: &quot;该成员已报名，请勿重复报名&quot;,
+  &quot;instance&quot;: &quot;/api/activities/1/registrations&quot;,
+  &quot;status&quot;: 409,
+  &quot;title&quot;: &quot;Conflict&quot;
+}</pre></section><section><h2>POST /api/activities/1/registrations -&gt; HTTP 409</h2><pre>{
+  &quot;detail&quot;: &quot;活动人数已满&quot;,
+  &quot;instance&quot;: &quot;/api/activities/1/registrations&quot;,
+  &quot;status&quot;: 409,
+  &quot;title&quot;: &quot;Conflict&quot;
+}</pre></section><section><h2>POST /api/activities -&gt; HTTP 400</h2><pre>{
+  &quot;detail&quot;: &quot;Invalid request content.&quot;,
+  &quot;instance&quot;: &quot;/api/activities&quot;,
+  &quot;status&quot;: 400,
+  &quot;title&quot;: &quot;Bad Request&quot;
+}</pre></section><footer>由实际执行日志生成的证据页截图；不是 IDE 或终端桌面截图。</footer>
