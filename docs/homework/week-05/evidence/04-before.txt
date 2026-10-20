@@ -1,0 +1,13 @@
+Week 05 | 2412190325 施晨煜 | 2026-10-20 09:03:49 +0800
+
+GET http://127.0.0.1:8080/api/activities/1
+HTTP 200
+{"id": 1, "name": "Week05桌游之夜", "location": "学生活动中心", "startsAt": "2099-10-25T19:00:00", "capacity": 6}
+
+GET http://127.0.0.1:8080/api/activities/1/registrations/1
+HTTP 200
+{"id": 1, "activityId": 1, "memberNo": "2412190325", "memberName": "施晨煜", "registeredAt": "2026-10-20T09:00:20.051182"}
+$ docker compose ps
+NAME                           IMAGE                  COMMAND                   SERVICE   CREATED          STATUS                    PORTS
+scy-boardgame-week05-app-1     scy-boardgame:week05   "java -jar /app/app.…"   app       30 minutes ago   Up 30 minutes             127.0.0.1:8080->8080/tcp
+scy-boardgame-week05-mysql-1   mysql:8.4.11           "docker-entrypoint.s…"   mysql     30 minutes ago   Up 30 minutes (healthy)   3306/tcp, 33060/tcp

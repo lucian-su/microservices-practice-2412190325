@@ -1,1 +1,9 @@
 .DS_Store
+
+# Week 05 runtime files
+.env
+.env.*
+!.env.example
+.week05-state.json
+.week05-verified.json
+__pycache__/

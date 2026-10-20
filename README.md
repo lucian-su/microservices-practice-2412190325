@@ -276,3 +276,51 @@ python3 scripts/smoke-test.py
 无效请求返回 400；重复报名、人数已满、活动已开始返回 409。Controller 不直接访问 Repository。使用学号检查重复；暂无身份认证，仅用于课程业务验证。
 
 数据库设计见 [docs/database.md](docs/database.md)，本周记录及证据见 [docs/homework/week-04/index.md](docs/homework/week-04/index.md)。
+
+
+## Week 05：Docker 容器化（课后）
+
+需要 Docker Desktop（已启动）、Docker Compose v2、Python 3。Java 与 Maven 均在构建容器中运行，本机无需 JDK 25。
+
+```bash
+# 在仓库根目录。可以手动 cp .env.example .env 并修改密码，
+# 或使用下面脚本生成随机密码。已有 .env 不覆盖。
+bash scripts/week05/setup-env.sh
+docker compose config --quiet
+docker build -t scy-boardgame:week05 ./monolith
+docker compose up -d --build
+docker compose ps
+docker compose logs --tail=50 app
+```
+
+数据库为 MySQL 8.4.11，应用使用 mysql 服务名连接；命名卷保存数据；数据库健康后启动 app。
+.env 不提交。不要把 docker compose config 的完整输出截图或提交，以免暴露密码，检查配置使用 --quiet。
+
+```bash
+curl -i http://localhost:8080/actuator/health
+curl -i -X POST http://localhost:8080/api/activities \
+  -H 'Content-Type: application/json' \
+  -d '{"name":"Week05桌游之夜","location":"学生活动中心","startsAt":"2099-10-25T19:00:00","capacity":6}'
+curl -i http://localhost:8080/api/activities
+```
+
+完整记录真实运行结果，并自动检查同一活动与报名在容器重建后是否一致：
+
+```bash
+python3 scripts/week05/verify.py build
+python3 scripts/week05/verify.py up
+python3 scripts/week05/verify.py api
+python3 scripts/week05/verify.py persist
+```
+
+截图由本人在终端实际运行后截取，保存于 docs/homework/week-05/screenshots/。验证不自动截图。
+
+```bash
+# 停止服务，保留数据卷
+docker compose down
+# 再次启动，不重新构建
+docker compose up -d
+```
+
+不要执行 down -v，它会删除数据库数据。如果 8080 被占用，在 .env 中修改 APP_PORT，验证脚本自动读取新端口。
+详细过程见 [Week 05](docs/homework/week-05/index.md)。课内校园选课工程在独立交付目录运行，端口默认 8081，截图单独提交。

@@ -1,0 +1,42 @@
+Week 05 | 2412190325 施晨煜 | 2026-10-20 09:03:49 +0800
+$ docker compose down
+ Container scy-boardgame-week05-app-1 Stopping 
+ Container scy-boardgame-week05-app-1 Stopped 
+ Container scy-boardgame-week05-app-1 Removing 
+ Container scy-boardgame-week05-app-1 Removed 
+ Container scy-boardgame-week05-mysql-1 Stopping 
+ Container scy-boardgame-week05-mysql-1 Stopped 
+ Container scy-boardgame-week05-mysql-1 Removing 
+ Container scy-boardgame-week05-mysql-1 Removed 
+ Network scy-boardgame-week05_boardgame-network Removing 
+ Network scy-boardgame-week05_boardgame-network Removed 
+$ docker compose up -d
+ Network scy-boardgame-week05_boardgame-network Creating 
+ Network scy-boardgame-week05_boardgame-network Creating 
+ Network scy-boardgame-week05_boardgame-network Created 
+ Network scy-boardgame-week05_boardgame-network Created 
+ Container scy-boardgame-week05-mysql-1 Creating 
+ Container scy-boardgame-week05-mysql-1 Created 
+ Container scy-boardgame-week05-app-1 Creating 
+ Container scy-boardgame-week05-app-1 Created 
+ Container scy-boardgame-week05-mysql-1 Starting 
+ Container scy-boardgame-week05-mysql-1 Started 
+ Container scy-boardgame-week05-mysql-1 Waiting 
+ Container scy-boardgame-week05-mysql-1 Healthy 
+ Container scy-boardgame-week05-app-1 Starting 
+ Container scy-boardgame-week05-app-1 Started 
+Waiting for http://127.0.0.1:8080/actuator/health
+Application is ready.
+$ docker compose ps
+NAME                           IMAGE                  COMMAND                   SERVICE   CREATED          STATUS                   PORTS
+scy-boardgame-week05-app-1     scy-boardgame:week05   "java -jar /app/app.…"   app       10 seconds ago   Up 4 seconds             127.0.0.1:8080->8080/tcp
+scy-boardgame-week05-mysql-1   mysql:8.4.11           "docker-entrypoint.s…"   mysql     10 seconds ago   Up 9 seconds (healthy)   3306/tcp, 33060/tcp
+
+GET http://127.0.0.1:8080/api/activities/1
+HTTP 200
+{"id": 1, "name": "Week05桌游之夜", "location": "学生活动中心", "startsAt": "2099-10-25T19:00:00", "capacity": 6}
+
+GET http://127.0.0.1:8080/api/activities/1/registrations/1
+HTTP 200
+{"id": 1, "activityId": 1, "memberNo": "2412190325", "memberName": "施晨煜", "registeredAt": "2026-10-20T09:00:20.051182"}
+PERSISTENCE CHECK PASSED: same activity ID, fields and registration after container recreation.

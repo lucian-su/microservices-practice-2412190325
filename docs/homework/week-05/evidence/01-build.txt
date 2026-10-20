@@ -1,0 +1,287 @@
+Week 05 | 2412190325 施晨煜 | 2026-10-20 08:16:31 +0800
+$ docker build --progress=plain -t scy-boardgame:week05 ./monolith
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 356B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/eclipse-temurin:25.0.4.1_1-jre
+#2 ...
+
+#3 [auth] library/eclipse-temurin:pull token for registry-1.docker.io
+#3 DONE 0.0s
+
+#4 [auth] library/maven:pull token for registry-1.docker.io
+#4 DONE 0.0s
+
+#5 [internal] load metadata for docker.io/library/maven:3.9.16-eclipse-temurin-25
+#5 ...
+
+#2 [internal] load metadata for docker.io/library/eclipse-temurin:25.0.4.1_1-jre
+#2 DONE 2.7s
+
+#5 [internal] load metadata for docker.io/library/maven:3.9.16-eclipse-temurin-25
+#5 DONE 2.7s
+
+#6 [internal] load .dockerignore
+#6 transferring context: 130B 0.0s done
+#6 DONE 0.0s
+
+#7 [stage-1 1/3] FROM docker.io/library/eclipse-temurin:25.0.4.1_1-jre@sha256:dbb43d81099eec91e0800226ed2296d03146ee7857165b95112372ad0d67e87f
+#7 resolve docker.io/library/eclipse-temurin:25.0.4.1_1-jre@sha256:dbb43d81099eec91e0800226ed2296d03146ee7857165b95112372ad0d67e87f done
+#7 DONE 0.0s
+
+#8 [stage-1 2/3] WORKDIR /app
+#8 CACHED
+
+#9 [builder 1/5] FROM docker.io/library/maven:3.9.16-eclipse-temurin-25@sha256:93b8a14ea2f412782e4e842651273b4d903e35cc496284f178fbbe2d67d00976
+#9 resolve docker.io/library/maven:3.9.16-eclipse-temurin-25@sha256:93b8a14ea2f412782e4e842651273b4d903e35cc496284f178fbbe2d67d00976 done
+#9 DONE 0.0s
+
+#10 [internal] load build context
+#10 transferring context: 3.22kB done
+#10 DONE 0.0s
+
+#11 [builder 2/5] WORKDIR /build
+#11 CACHED
+
+#12 [builder 3/5] COPY pom.xml ./
+#12 CACHED
+
+#13 [builder 4/5] COPY src ./src
+#13 CACHED
+
+#14 [builder 5/5] RUN mvn -B -ntp clean package
+#14 0.783 [INFO] Scanning for projects...
+#14 13.65 [INFO] 
+#14 13.65 [INFO] -----------------------< com.zjgsu.scy:monolith >-----------------------
+#14 13.65 [INFO] Building  0.0.1-SNAPSHOT
+#14 13.65 [INFO]   from pom.xml
+#14 13.65 [INFO] --------------------------------[ jar ]---------------------------------
+#14 77.36 [INFO] 
+#14 77.36 [INFO] --- clean:3.5.0:clean (default-clean) @ monolith ---
+#14 77.87 [INFO] 
+#14 77.87 [INFO] --- resources:3.3.1:resources (default-resources) @ monolith ---
+#14 83.42 [INFO] Copying 1 resource from src/main/resources to target/classes
+#14 83.44 [INFO] Copying 0 resource from src/main/resources to target/classes
+#14 83.44 [INFO] 
+#14 83.44 [INFO] --- compiler:3.14.1:compile (default-compile) @ monolith ---
+#14 89.11 [INFO] Recompiling the module because of changed source code.
+#14 89.12 [INFO] Compiling 16 source files with javac [debug parameters release 25] to target/classes
+#14 89.58 [INFO] 
+#14 89.58 [INFO] --- resources:3.3.1:testResources (default-testResources) @ monolith ---
+#14 89.58 [INFO] Copying 1 resource from src/test/resources to target/test-classes
+#14 89.58 [INFO] 
+#14 89.58 [INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ monolith ---
+#14 89.59 [INFO] Recompiling the module because of changed dependency.
+#14 89.59 [INFO] Compiling 5 source files with javac [debug parameters release 25] to target/test-classes
+#14 89.80 [INFO] 
+#14 89.80 [INFO] --- surefire:3.5.6:test (default-test) @ monolith ---
+#14 95.65 [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+#14 99.18 [INFO] 
+#14 99.18 [INFO] -------------------------------------------------------
+#14 99.18 [INFO]  T E S T S
+#14 99.18 [INFO] -------------------------------------------------------
+#14 99.52 [INFO] Running com.zjgsu.scy.monolith.repository.ActivityRepositoryTest
+#14 99.61 00:18:15.549 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.zjgsu.scy.monolith.repository.ActivityRepositoryTest]: ActivityRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+#14 99.71 00:18:15.616 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.zjgsu.scy.monolith.MonolithApplication for test class com.zjgsu.scy.monolith.repository.ActivityRepositoryTest
+#14 99.71 00:18:15.617 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.zjgsu.scy.monolith.repository.ActivityRepositoryTest]: ActivityRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+#14 99.71 00:18:15.623 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.zjgsu.scy.monolith.MonolithApplication for test class com.zjgsu.scy.monolith.repository.ActivityRepositoryTest
+#14 99.81 
+#14 99.81   .   ____          _            __ _ _
+#14 99.81  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+#14 99.81 ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+#14 99.81  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+#14 99.81   '  |____| .__|_| |_|_| |_\__, | / / / /
+#14 99.81  =========|_|==============|___/=/_/_/_/
+#14 99.81 
+#14 99.81  :: Spring Boot ::                (v4.0.8)
+#14 99.81 
+#14 99.91 2026-10-20T00:18:15.781Z  INFO 121 --- [           main] c.z.s.m.r.ActivityRepositoryTest         : Starting ActivityRepositoryTest using Java 25.0.4.1 with PID 121 (started by root in /build)
+#14 99.91 2026-10-20T00:18:15.782Z  INFO 121 --- [           main] c.z.s.m.r.ActivityRepositoryTest         : No active profile set, falling back to 1 default profile: "default"
+#14 100.0 2026-10-20T00:18:15.944Z  INFO 121 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+#14 100.0 2026-10-20T00:18:15.962Z  INFO 121 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 15 ms. Found 3 JPA repository interfaces.
+#14 100.1 2026-10-20T00:18:15.983Z  INFO 121 --- [           main] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+#14 100.1 2026-10-20T00:18:16.022Z  INFO 121 --- [           main] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:c0f84c7b-4e4c-438b-bee5-aa08faae635e;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+#14 100.2 2026-10-20T00:18:16.161Z  INFO 121 --- [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+#14 100.3 2026-10-20T00:18:16.182Z  INFO 121 --- [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.24.Final
+#14 100.5 2026-10-20T00:18:16.369Z  INFO 121 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+#14 100.5 2026-10-20T00:18:16.402Z  INFO 121 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+#14 100.5 	Database JDBC URL [jdbc:h2:mem:c0f84c7b-4e4c-438b-bee5-aa08faae635e]
+#14 100.5 	Database driver: H2 JDBC Driver
+#14 100.5 	Database dialect: H2Dialect
+#14 100.5 	Database version: 2.4.240
+#14 100.5 	Default catalog/schema: C0F84C7B-4E4C-438B-BEE5-AA08FAAE635E/PUBLIC
+#14 100.5 	Autocommit mode: undefined/unknown
+#14 100.5 	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+#14 100.5 	JDBC fetch size: 100
+#14 100.5 	Pool: DataSourceConnectionProvider
+#14 100.5 	Minimum pool size: undefined/unknown
+#14 100.5 	Maximum pool size: undefined/unknown
+#14 100.8 2026-10-20T00:18:16.691Z  INFO 121 --- [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+#14 100.8 Hibernate: drop table if exists activities cascade 
+#14 100.8 Hibernate: drop table if exists courses cascade 
+#14 100.8 Hibernate: drop table if exists registrations cascade 
+#14 100.8 Hibernate: create table activities (capacity integer not null, id bigint generated by default as identity, starts_at timestamp(6) not null, name varchar(100) not null, location varchar(120) not null, primary key (id))
+#14 100.8 Hibernate: create table courses (id bigint generated by default as identity, code varchar(30) not null, name varchar(100) not null, primary key (id), unique (code))
+#14 100.8 Hibernate: create table registrations (activity_id bigint not null, id bigint generated by default as identity, registered_at timestamp(6) not null, member_no varchar(30) not null, member_name varchar(50) not null, primary key (id), constraint uk_activity_member unique (activity_id, member_no))
+#14 100.8 Hibernate: alter table if exists registrations add constraint FK4u0b5pwxhrwmns1p92hsf3cg2 foreign key (activity_id) references activities
+#14 100.8 2026-10-20T00:18:16.718Z  INFO 121 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+#14 100.9 2026-10-20T00:18:16.794Z  INFO 121 --- [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+#14 101.1 2026-10-20T00:18:17.085Z  INFO 121 --- [           main] c.z.s.m.r.ActivityRepositoryTest         : Started ActivityRepositoryTest in 1.437 seconds (process running for 1.904)
+#14 101.2 Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+#14 101.4 OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+#14 101.4 Hibernate: insert into activities (capacity,location,name,starts_at,id) values (?,?,?,?,default)
+#14 101.4 WARNING: A Java agent has been loaded dynamically (/root/.m2/repository/net/bytebuddy/byte-buddy-agent/1.17.8/byte-buddy-agent-1.17.8.jar)
+#14 101.4 WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+#14 101.4 WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+#14 101.4 WARNING: Dynamic loading of agents will be disallowed by default in a future release
+#14 101.5 Hibernate: insert into registrations (activity_id,member_name,member_no,registered_at,id) values (?,?,?,?,default)
+#14 101.5 Hibernate: select a1_0.id,a1_0.capacity,a1_0.location,a1_0.name,a1_0.starts_at from activities a1_0 where a1_0.id=?
+#14 101.5 Hibernate: select r1_0.id,r1_0.activity_id,r1_0.member_name,r1_0.member_no,r1_0.registered_at from registrations r1_0 where r1_0.activity_id=? order by r1_0.id
+#14 101.5 Hibernate: select count(r1_0.id) from registrations r1_0 where r1_0.activity_id=?
+#14 101.5 Hibernate: insert into activities (capacity,location,name,starts_at,id) values (?,?,?,?,default)
+#14 101.5 Hibernate: insert into registrations (activity_id,member_name,member_no,registered_at,id) values (?,?,?,?,default)
+#14 101.5 Hibernate: insert into registrations (activity_id,member_name,member_no,registered_at,id) values (?,?,?,?,default)
+#14 101.5 2026-10-20T00:18:17.479Z  WARN 121 --- [           main] org.hibernate.orm.jdbc.error             : HHH000247: ErrorCode: 23505, SQLState: 23505
+#14 101.5 2026-10-20T00:18:17.479Z  WARN 121 --- [           main] org.hibernate.orm.jdbc.error             : Unique index or primary key violation: "PUBLIC.UK_ACTIVITY_MEMBER INDEX PUBLIC.UK_ACTIVITY_MEMBER_INDEX_F ON PUBLIC.REGISTRATIONS(ACTIVITY_ID NULLS FIRST, MEMBER_NO NULLS FIRST) VALUES ( /* key:2 */ CAST(2 AS BIGINT), 'same')"; SQL statement:
+#14 101.5 insert into registrations (activity_id,member_name,member_no,registered_at,id) values (?,?,?,?,default) [23505-240]
+#14 101.5 Hibernate: insert into courses (code,name,id) values (?,?,default)
+#14 101.5 Hibernate: select c1_0.id,c1_0.code,c1_0.name from courses c1_0 where c1_0.id=?
+#14 101.6 [INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.023 s -- in com.zjgsu.scy.monolith.repository.ActivityRepositoryTest
+#14 101.6 [INFO] Running com.zjgsu.scy.monolith.MonolithApplicationTests
+#14 101.6 2026-10-20T00:18:17.502Z  INFO 121 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.zjgsu.scy.monolith.MonolithApplicationTests]: MonolithApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+#14 101.6 2026-10-20T00:18:17.508Z  INFO 121 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.zjgsu.scy.monolith.MonolithApplication for test class com.zjgsu.scy.monolith.MonolithApplicationTests
+#14 101.6 2026-10-20T00:18:17.510Z  INFO 121 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.zjgsu.scy.monolith.MonolithApplicationTests]: MonolithApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+#14 101.6 2026-10-20T00:18:17.511Z  INFO 121 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.zjgsu.scy.monolith.MonolithApplication for test class com.zjgsu.scy.monolith.MonolithApplicationTests
+#14 101.6 
+#14 101.6   .   ____          _            __ _ _
+#14 101.6  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+#14 101.6 ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+#14 101.6  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+#14 101.6   '  |____| .__|_| |_|_| |_\__, | / / / /
+#14 101.6  =========|_|==============|___/=/_/_/_/
+#14 101.6 
+#14 101.6  :: Spring Boot ::                (v4.0.8)
+#14 101.6 
+#14 101.6 2026-10-20T00:18:17.553Z  INFO 121 --- [           main] c.z.s.monolith.MonolithApplicationTests  : Starting MonolithApplicationTests using Java 25.0.4.1 with PID 121 (started by root in /build)
+#14 101.6 2026-10-20T00:18:17.554Z  INFO 121 --- [           main] c.z.s.monolith.MonolithApplicationTests  : No active profile set, falling back to 1 default profile: "default"
+#14 101.8 2026-10-20T00:18:17.736Z  INFO 121 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+#14 101.8 2026-10-20T00:18:17.740Z  INFO 121 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 3 ms. Found 3 JPA repository interfaces.
+#14 101.9 2026-10-20T00:18:17.862Z  INFO 121 --- [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+#14 101.9 2026-10-20T00:18:17.872Z  INFO 121 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+#14 101.9 2026-10-20T00:18:17.873Z  INFO 121 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+#14 102.0 2026-10-20T00:18:17.880Z  INFO 121 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn7: url=jdbc:h2:mem:boardgame_test user=SA
+#14 102.0 2026-10-20T00:18:17.881Z  INFO 121 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+#14 102.0 2026-10-20T00:18:17.886Z  INFO 121 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+#14 102.0 	Database JDBC URL [jdbc:h2:mem:boardgame_test]
+#14 102.0 	Database driver: H2 JDBC Driver
+#14 102.0 	Database dialect: H2Dialect
+#14 102.0 	Database version: 2.4.240
+#14 102.0 	Default catalog/schema: BOARDGAME_TEST/PUBLIC
+#14 102.0 	Autocommit mode: undefined/unknown
+#14 102.0 	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+#14 102.0 	JDBC fetch size: 100
+#14 102.0 	Pool: DataSourceConnectionProvider
+#14 102.0 	Minimum pool size: undefined/unknown
+#14 102.0 	Maximum pool size: undefined/unknown
+#14 102.0 2026-10-20T00:18:17.908Z  INFO 121 --- [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+#14 102.0 2026-10-20T00:18:17.912Z  INFO 121 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+#14 102.3 2026-10-20T00:18:18.273Z  INFO 121 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+#14 102.4 2026-10-20T00:18:18.299Z  INFO 121 --- [           main] c.z.s.monolith.MonolithApplicationTests  : Started MonolithApplicationTests in 0.774 seconds (process running for 3.117)
+#14 102.4 [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.846 s -- in com.zjgsu.scy.monolith.MonolithApplicationTests
+#14 102.4 [INFO] Running com.zjgsu.scy.monolith.service.ActivityServiceTest
+#14 102.4 2026-10-20T00:18:18.348Z  INFO 121 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.zjgsu.scy.monolith.service.ActivityServiceTest]: ActivityServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+#14 102.4 2026-10-20T00:18:18.354Z  INFO 121 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.zjgsu.scy.monolith.MonolithApplication for test class com.zjgsu.scy.monolith.service.ActivityServiceTest
+#14 102.4 2026-10-20T00:18:18.355Z  INFO 121 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.zjgsu.scy.monolith.service.ActivityServiceTest]: ActivityServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+#14 102.4 2026-10-20T00:18:18.356Z  INFO 121 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.zjgsu.scy.monolith.MonolithApplication for test class com.zjgsu.scy.monolith.service.ActivityServiceTest
+#14 102.5 [INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.059 s -- in com.zjgsu.scy.monolith.service.ActivityServiceTest
+#14 102.5 [INFO] Running com.zjgsu.scy.monolith.service.RegistrationConcurrencyTest
+#14 102.5 2026-10-20T00:18:18.408Z  INFO 121 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.zjgsu.scy.monolith.service.RegistrationConcurrencyTest]: RegistrationConcurrencyTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+#14 102.5 2026-10-20T00:18:18.409Z  INFO 121 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.zjgsu.scy.monolith.MonolithApplication for test class com.zjgsu.scy.monolith.service.RegistrationConcurrencyTest
+#14 102.5 2026-10-20T00:18:18.409Z  INFO 121 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.zjgsu.scy.monolith.service.RegistrationConcurrencyTest]: RegistrationConcurrencyTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+#14 102.5 2026-10-20T00:18:18.409Z  INFO 121 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.zjgsu.scy.monolith.MonolithApplication for test class com.zjgsu.scy.monolith.service.RegistrationConcurrencyTest
+#14 102.5 [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.037 s -- in com.zjgsu.scy.monolith.service.RegistrationConcurrencyTest
+#14 102.5 [INFO] Running com.zjgsu.scy.monolith.controller.ActivityApiTest
+#14 102.6 2026-10-20T00:18:18.447Z  INFO 121 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.zjgsu.scy.monolith.controller.ActivityApiTest]: ActivityApiTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+#14 102.6 2026-10-20T00:18:18.452Z  INFO 121 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.zjgsu.scy.monolith.MonolithApplication for test class com.zjgsu.scy.monolith.controller.ActivityApiTest
+#14 102.6 2026-10-20T00:18:18.453Z  INFO 121 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.zjgsu.scy.monolith.controller.ActivityApiTest]: ActivityApiTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+#14 102.6 2026-10-20T00:18:18.453Z  INFO 121 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.zjgsu.scy.monolith.MonolithApplication for test class com.zjgsu.scy.monolith.controller.ActivityApiTest
+#14 102.6 
+#14 102.6   .   ____          _            __ _ _
+#14 102.6  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+#14 102.6 ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+#14 102.6  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+#14 102.6   '  |____| .__|_| |_|_| |_\__, | / / / /
+#14 102.6  =========|_|==============|___/=/_/_/_/
+#14 102.6 
+#14 102.6  :: Spring Boot ::                (v4.0.8)
+#14 102.6 
+#14 102.6 2026-10-20T00:18:18.465Z  INFO 121 --- [           main] c.z.s.m.controller.ActivityApiTest       : Starting ActivityApiTest using Java 25.0.4.1 with PID 121 (started by root in /build)
+#14 102.6 2026-10-20T00:18:18.465Z  INFO 121 --- [           main] c.z.s.m.controller.ActivityApiTest       : No active profile set, falling back to 1 default profile: "default"
+#14 102.6 2026-10-20T00:18:18.532Z  INFO 121 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+#14 102.6 2026-10-20T00:18:18.535Z  INFO 121 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 2 ms. Found 3 JPA repository interfaces.
+#14 102.6 2026-10-20T00:18:18.569Z  INFO 121 --- [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+#14 102.6 2026-10-20T00:18:18.577Z  INFO 121 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+#14 102.6 2026-10-20T00:18:18.578Z  INFO 121 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+#14 102.7 2026-10-20T00:18:18.579Z  INFO 121 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection conn17: url=jdbc:h2:mem:boardgame_test user=SA
+#14 102.7 2026-10-20T00:18:18.579Z  INFO 121 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+#14 102.7 2026-10-20T00:18:18.580Z  INFO 121 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+#14 102.7 	Database JDBC URL [jdbc:h2:mem:boardgame_test]
+#14 102.7 	Database driver: H2 JDBC Driver
+#14 102.7 	Database dialect: H2Dialect
+#14 102.7 	Database version: 2.4.240
+#14 102.7 	Default catalog/schema: BOARDGAME_TEST/PUBLIC
+#14 102.7 	Autocommit mode: undefined/unknown
+#14 102.7 	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+#14 102.7 	JDBC fetch size: 100
+#14 102.7 	Pool: DataSourceConnectionProvider
+#14 102.7 	Minimum pool size: undefined/unknown
+#14 102.7 	Maximum pool size: undefined/unknown
+#14 102.7 2026-10-20T00:18:18.603Z  INFO 121 --- [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+#14 102.7 2026-10-20T00:18:18.608Z  INFO 121 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+#14 102.7 2026-10-20T00:18:18.686Z  INFO 121 --- [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+#14 102.7 2026-10-20T00:18:18.686Z  INFO 121 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+#14 102.7 2026-10-20T00:18:18.687Z  INFO 121 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+#14 102.7 2026-10-20T00:18:18.689Z  INFO 121 --- [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 3 ms
+#14 102.7 2026-10-20T00:18:18.696Z  INFO 121 --- [           main] c.z.s.m.controller.ActivityApiTest       : Started ActivityApiTest in 0.241 seconds (process running for 3.515)
+#14 102.9 [INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.420 s -- in com.zjgsu.scy.monolith.controller.ActivityApiTest
+#14 103.0 [INFO] 
+#14 103.0 [INFO] Results:
+#14 103.0 [INFO] 
+#14 103.0 [INFO] Tests run: 15, Failures: 0, Errors: 0, Skipped: 0
+#14 103.0 [INFO] 
+#14 103.0 [INFO] 
+#14 103.0 [INFO] --- jar:3.4.2:jar (default-jar) @ monolith ---
+#14 190.8 [INFO] Building jar: /build/target/monolith-0.0.1-SNAPSHOT.jar
+#14 190.8 [INFO] 
+#14 190.8 [INFO] --- spring-boot:4.0.8:repackage (repackage) @ monolith ---
+#14 287.9 [INFO] Replacing main artifact /build/target/monolith-0.0.1-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+#14 287.9 [INFO] The original artifact has been renamed to /build/target/monolith-0.0.1-SNAPSHOT.jar.original
+#14 287.9 [INFO] ------------------------------------------------------------------------
+#14 287.9 [INFO] BUILD SUCCESS
+#14 287.9 [INFO] ------------------------------------------------------------------------
+#14 287.9 [INFO] Total time:  04:47 min
+#14 287.9 [INFO] Finished at: 2026-10-20T00:21:23Z
+#14 287.9 [INFO] ------------------------------------------------------------------------
+#14 DONE 288.1s
+
+#15 [stage-1 3/3] COPY --from=builder /build/target/monolith-0.0.1-SNAPSHOT.jar app.jar
+#15 DONE 0.1s
+
+#16 exporting to image
+#16 exporting layers
+#16 exporting layers 1.0s done
+#16 exporting manifest sha256:44d85f6c1a88a0ac9f767d0615a6572872962266bcfe84ff8db6ad00a1d539b3 done
+#16 exporting config sha256:649a6081ac7eeb47d71d82ff29d14d351d762aaf78d7268265a13dbcdd1c4548 done
+#16 exporting attestation manifest sha256:77d7d4c2274eda83be9e05dcbe52949911b39d921e5f4a2352acd1787d4c2561 0.0s done
+#16 exporting manifest list sha256:e259b7d04dd08fb5d1917790ca0d613fdfa3faed6dd66df2b662444b04b4a1f9 done
+#16 naming to docker.io/library/scy-boardgame:week05 done
+#16 unpacking to docker.io/library/scy-boardgame:week05
+#16 unpacking to docker.io/library/scy-boardgame:week05 0.2s done
+#16 DONE 1.2s
+$ docker image ls scy-boardgame:week05
+IMAGE                  ID             DISK USAGE   CONTENT SIZE   EXTRA
+scy-boardgame:week05   e259b7d04dd0        605MB          168MB        
+IMAGE BUILD CHECK PASSED

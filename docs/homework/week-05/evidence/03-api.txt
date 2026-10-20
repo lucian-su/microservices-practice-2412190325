@@ -1,0 +1,28 @@
+Week 05 | 2412190325 施晨煜 | 2026-10-20 09:00:19 +0800
+Waiting for http://127.0.0.1:8080/actuator/health
+Application is ready.
+
+GET http://127.0.0.1:8080/actuator/health
+HTTP 200
+{"groups": ["liveness", "readiness"], "status": "UP"}
+
+POST http://127.0.0.1:8080/api/activities
+Request: {"name": "Week05桌游之夜", "location": "学生活动中心", "startsAt": "2099-10-25T19:00:00", "capacity": 6}
+HTTP 201
+Location: /api/activities/1
+{"id": 1, "name": "Week05桌游之夜", "location": "学生活动中心", "startsAt": "2099-10-25T19:00:00", "capacity": 6}
+
+GET http://127.0.0.1:8080/api/activities/1
+HTTP 200
+{"id": 1, "name": "Week05桌游之夜", "location": "学生活动中心", "startsAt": "2099-10-25T19:00:00", "capacity": 6}
+
+POST http://127.0.0.1:8080/api/activities/1/registrations
+Request: {"memberNo": "2412190325", "memberName": "施晨煜"}
+HTTP 201
+Location: /api/activities/1/registrations/1
+{"id": 1, "activityId": 1, "memberNo": "2412190325", "memberName": "施晨煜", "registeredAt": "2026-10-20T09:00:20.051182262"}
+
+GET http://127.0.0.1:8080/api/activities/1/registrations
+HTTP 200
+[{"id": 1, "activityId": 1, "memberNo": "2412190325", "memberName": "施晨煜", "registeredAt": "2026-10-20T09:00:20.051182"}]
+API CHECK PASSED: health 200, creation 201, query 200.
